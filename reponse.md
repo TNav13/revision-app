@@ -34,3 +34,20 @@ Il ne faut pas reconstruire l'image entre prod et staging car les tests/lintage/
 **Question 9**
 L'utilisation du tag `:latest` en production est proscrite car elle induit une incertitude sur la version exacte du code exécuté, rendant le déploiement non reproductible et imprévisible. Ce tag est dynamique par nature et pointera toujours vers la version la plus récente poussée sur le dépôt, ce qui empêche de garantir la stabilité de l'application en cas de mise à jour automatique. En cas de déploiement d'une version contenant des vulnérabilités ou des régressions critiques, l'absence de version fixe complique considérablement le processus de retour arrière (rollback). Enfin, cette pratique compromet la sécurité et l'auditabilité du système, puisque les outils d'analyse de vulnérabilités, comme Trivy, ne peuvent pas valider précisément l'intégrité d'une image dont le contenu varie arbitrairement au cours du temps.
 
+**Question 10**
+La documentation as code offre 3 avantages principaux :
+*Toujours à jour et versionnée* : Comme elle est gérée exactement comme le code, chaque modification est historisée (versionnée) et validée par une relecture de l'équipe (code review). Cela garantit sa fiabilité.
+*Propre et structurée* : Le contenu est découpé en fichiers distincts, simples et bien organisés, ce qui rend la maintenance beaucoup plus propre et lisible.
+*Facile à publier* : Elle peut être automatiquement déployée sous forme de site web statique moderne, agréable à lire et accessible à tous.
+
+**Question 11**
+L'Infrastructure as Code (avec Terraform) transforme une gestion cloud artisanale et opaque en un processus industriel et sécurisé. Contrairement à la création manuelle dans la console web, qui est sujette aux erreurs humaines et difficile à tracer, Terraform permet de définir l'infrastructure sous forme de fichiers texte. Cela garantit une infrastructure parfaitement reproductible à l'identique pour les environnements de test ou de production. De plus, comme ce code est versionné (sur Git), vous bénéficiez d'une traçabilité totale sur les modifications et pouvez facilement revenir en arrière en cas de problème. Enfin, vous obtenez une visibilité maximale grâce aux plans d'exécution qui permettent de valider précisément chaque changement avant qu'il ne soit appliqué, évitant ainsi toute destruction accidentelle.
+
+**Question 12** 
+Choisir Cloud Run est idéal si vous voulez déployer rapidement sans vous soucier de la complexité et de la maintenance de Kubernetes, avec en prime une mise à l'échelle automatique qui peut descendre jusqu'à zéro pour économiser des coûts. À l'inverse, optez pour Kubernetes si vous avez besoin d'un contrôle total sur l'infrastructure, le réseau, le stockage persistant ou si vous devez gérer une architecture multi-cloud complexe.
+
+**Question 13**
+
+'est une très bonne base, mais on peut la rendre plus percutante. Voici une version courte en un seul bloc :
+Le GitOps consiste à utiliser Git comme unique source de vérité pour l'infrastructure et les applications. Son principal intérêt est la sécurité et l'automatisation : toute modification du code déclenche automatiquement le déploiement, et le système se répare tout seul en cas d'écart avec ce qui est défini dans Git.
+
