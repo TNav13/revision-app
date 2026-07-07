@@ -51,3 +51,18 @@ Choisir Cloud Run est idéal si vous voulez déployer rapidement sans vous souci
 'est une très bonne base, mais on peut la rendre plus percutante. Voici une version courte en un seul bloc :
 Le GitOps consiste à utiliser Git comme unique source de vérité pour l'infrastructure et les applications. Son principal intérêt est la sécurité et l'automatisation : toute modification du code déclenche automatiquement le déploiement, et le système se répare tout seul en cas d'écart avec ce qui est défini dans Git.
 
+**Question 14**
+
+*Nom et principe*
+Le service de conteneurs managés d'AWS est Amazon ECS (Elastic Container Service), souvent associé à AWS Fargate pour sa déclinaison sans serveur (serverless).
+
+Son principe est de permettre l'orchestration, l'exécution et la mise à l'échelle automatique de conteneurs Docker sur le cloud d'Amazon sans avoir à gérer la complexité d'un cluster Kubernetes complet.
+
+**Points communs avec Cloud Run**
+Abstraction des serveurs (avec Fargate) : Dans les deux cas, vous n'avez pas à gérer, patcher ou provisionner des machines virtuelles sous-jacentes. Vous fournissez simplement votre image de conteneur.
+Intégration écosystémique forte : Les deux services s'intègrent nativement avec les outils de sécurité (IAM), de journalisation (CloudWatch pour AWS, Cloud Logging pour GCP) et les registres de conteneurs de leur fournisseur respectif.
+
+**Différences avec Cloud Run**
+
+Le modèle de tarification et mise à l'échelle à zéro : Cloud Run est un modèle purement basé sur les requêtes et peut scaler automatiquement jusqu'à zéro instance (vous ne payez rien s'il n'y a pas de trafic). Amazon ECS (même avec Fargate) nécessite généralement qu'au moins une tâche tourne en continu pour maintenir le service actif, générant un coût fixe minimal.
+Le niveau de contrôle réseau et d'infrastructure : Cloud Run masque presque toute la couche réseau par défaut. Amazon ECS s'exécute obligatoirement au sein d'un VPC (Virtual Private Cloud) AWS, vous donnant un contrôle total mais complexe sur les sous-réseaux, les groupes de sécurité et le routage interne.
