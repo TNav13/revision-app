@@ -19,3 +19,7 @@ def health():
 @app.get("/version")
 def version():
     return jsonify(version=__version__)
+
+@app.get("/stats")
+def stats():
+    return jsonify(routes=4, version=__version__, uptime="ok")
